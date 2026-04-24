@@ -1,0 +1,9 @@
+.env
+delta_lake/
+__pycache__/
+*.pyc
+.ivy2/
+airflow/logs/
+airflow/.astro/
+airflow/airflow.db
+producer/venv/

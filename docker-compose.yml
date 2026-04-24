@@ -1,0 +1,41 @@
+services:
+
+  # ── Producer ────────────────────────────────────────────────────────────────
+  # Polls NewsAPI + yfinance every 15 min, pushes to Confluent Kafka
+  producer:
+    build: ./producer
+    env_file: .env
+    restart: unless-stopped   # auto-restart on crash
+    volumes:
+      # Mount source so you can edit producer.py without rebuilding the image
+      - ./producer:/app
+
+  # ── Spark Structured Streaming ───────────────────────────────────────────────
+  # Consumes from Kafka, writes to Delta Lake (bronze)
+  # We use bitnami/spark directly — no custom Dockerfile needed
+  spark-streaming:
+    image: apache/spark:3.5.1
+    user: root                  # bitnami runs as non-root by default; root needed to write to volume
+    env_file: .env
+    ports:
+      - "4040:4040"             # Spark Web UI — shows running queries, DAGs, throughput
+    volumes:
+      - ./spark:/app                        # your Python script
+      - ./delta_lake:/delta_lake            # where Delta tables are written (persists on host)
+      - ivy2-cache:/root/.ivy2              # Maven JAR cache — persists between restarts
+    command: >
+      /opt/spark/bin/spark-submit
+      --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.1,io.delta:delta-spark_2.12:3.1.0
+      --conf spark.sql.extensions=io.delta.sql.DeltaSparkSessionExtension
+      --conf spark.sql.catalog.spark_catalog=org.apache.spark.sql.delta.catalog.DeltaCatalog
+      --conf spark.driver.extraJavaOptions=-Divy.home=/root/.ivy2
+      --conf spark.executor.extraJavaOptions=-Divy.home=/root/.ivy2
+      /app/streaming_consumer.py
+    # Spark needs time to download JARs on first run (~2 min)
+    # Don't panic if it's silent for a bit
+    restart: unless-stopped
+    depends_on:
+      - producer   # start producer first so Kafka topics have data when Spark connects
+
+volumes:
+  ivy2-cache:   # named volume so JARs survive docker-compose down/up
