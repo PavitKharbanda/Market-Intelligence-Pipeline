@@ -37,5 +37,52 @@ services:
     depends_on:
       - producer   # start producer first so Kafka topics have data when Spark connects
 
+  # ── Silver batch transform ────────────────────────────────────────────────
+  # Runs once and exits (no restart). Triggered manually for now,
+  # Airflow will trigger it on schedule in Phase 2.
+  spark-silver:
+    image: apache/spark:3.5.1
+    user: root
+    env_file: .env
+    volumes:
+      - ./silver:/app
+      - ./delta_lake:/delta_lake
+      - ivy2-cache:/root/.ivy2
+    command: >
+      /opt/spark/bin/spark-submit
+      --packages io.delta:delta-spark_2.12:3.1.0
+      --conf spark.sql.extensions=io.delta.sql.DeltaSparkSessionExtension
+      --conf spark.sql.catalog.spark_catalog=org.apache.spark.sql.delta.catalog.DeltaCatalog
+      --conf spark.driver.extraJavaOptions=-Divy.home=/root/.ivy2
+      /app/silver_transform.py
+    # No restart — this is a batch job, runs and exits
+    profiles: ["silver"]
+
+  # ── Spark Thrift Server (dbt SQL endpoint) ───────────────────────────────
+  # Exposes a JDBC/HiveServer2 endpoint on port 10000
+  # dbt connects to this to run SQL against Delta tables
+  spark-thrift:
+    image: apache/spark:3.5.1
+    user: root
+    ports:
+      - "10000:10000"
+      - "4041:4040"
+    volumes:
+      - ./delta_lake:/delta_lake
+      - ./delta_lake/gold:/opt/spark/work-dir/spark-warehouse
+      - ivy2-cache:/root/.ivy2
+    command: >
+      bash -c "
+      cp /root/.ivy2/jars/io.delta_delta-spark_2.12-3.1.0.jar /opt/spark/jars/ &&
+      cp /root/.ivy2/jars/io.delta_delta-storage-3.1.0.jar /opt/spark/jars/ &&
+      /opt/spark/bin/spark-submit
+      --class org.apache.spark.sql.hive.thriftserver.HiveThriftServer2
+      --conf spark.sql.extensions=io.delta.sql.DeltaSparkSessionExtension
+      --conf spark.sql.catalog.spark_catalog=org.apache.spark.sql.delta.catalog.DeltaCatalog
+      --hiveconf hive.server2.thrift.port=10000
+      --hiveconf hive.server2.thrift.bind.host=0.0.0.0
+      "
+    profiles: ["dbt"]
+
 volumes:
   ivy2-cache:   # named volume so JARs survive docker-compose down/up

@@ -1,0 +1,100 @@
+[0m16:18:24.824855 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10658b2b0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1041aa2e0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1086f19d0>]}
+
+
+============================== 16:18:24.830812 | 74fa114a-cfb2-41d1-b143-dc35b769927f ==============================
+[0m16:18:24.830812 [info ] [MainThread]: Running with dbt=1.7.0
+[0m16:18:24.831745 [debug] [MainThread]: running dbt with arguments {'log_cache_events': 'False', 'introspect': 'True', 'partial_parse': 'True', 'use_experimental_parser': 'False', 'fail_fast': 'False', 'profiles_dir': '/Users/pavitkharbanda/.dbt', 'no_print': 'None', 'write_json': 'True', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'debug': 'False', 'warn_error': 'None', 'log_format': 'default', 'cache_selected_only': 'False', 'version_check': 'True', 'quiet': 'False', 'indirect_selection': 'eager', 'printer_width': '80', 'log_path': 'logs', 'target_path': 'None', 'static_parser': 'True', 'use_colors': 'True', 'invocation_command': 'dbt init market_pulse', 'send_anonymous_usage_stats': 'True'}
+[0m16:18:24.832617 [warn ] [MainThread]: [ConfigFolderDirectory]: Unable to parse dict {'dir': PosixPath('/Users/pavitkharbanda/.dbt')}
+[0m16:18:24.833553 [info ] [MainThread]: Creating dbt configuration folder at 
+[0m16:18:24.835110 [debug] [MainThread]: Starter project path: /Users/pavitkharbanda/Documents/Projects/Market Intelligence Pipeline/Market-Intelligence-Pipeline/producer/venv/lib/python3.9/site-packages/dbt/include/starter_project
+[0m16:18:24.844298 [info ] [MainThread]: 
+Your new dbt project "market_pulse" was created!
+
+For more information on how to configure the profiles.yml file,
+please consult the dbt documentation here:
+
+  https://docs.getdbt.com/docs/configure-your-profile
+
+One more thing:
+
+Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
+
+  https://community.getdbt.com/
+
+Happy modeling!
+
+[0m16:18:24.845370 [info ] [MainThread]: Setting up your profile.
+[0m16:24:04.042199 [error] [MainThread]: Encountered an error:
+
+[0m16:24:04.142376 [error] [MainThread]: Traceback (most recent call last):
+  File "/Users/pavitkharbanda/Documents/Projects/Market Intelligence Pipeline/Market-Intelligence-Pipeline/producer/venv/lib/python3.9/site-packages/dbt/cli/requires.py", line 90, in wrapper
+    result, success = func(*args, **kwargs)
+  File "/Users/pavitkharbanda/Documents/Projects/Market Intelligence Pipeline/Market-Intelligence-Pipeline/producer/venv/lib/python3.9/site-packages/dbt/cli/requires.py", line 75, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/pavitkharbanda/Documents/Projects/Market Intelligence Pipeline/Market-Intelligence-Pipeline/producer/venv/lib/python3.9/site-packages/dbt/cli/main.py", line 515, in init
+    results = task.run()
+  File "/Users/pavitkharbanda/Documents/Projects/Market Intelligence Pipeline/Market-Intelligence-Pipeline/producer/venv/lib/python3.9/site-packages/dbt/task/init.py", line 344, in run
+    self.setup_profile(profile_name)
+  File "/Users/pavitkharbanda/Documents/Projects/Market Intelligence Pipeline/Market-Intelligence-Pipeline/producer/venv/lib/python3.9/site-packages/dbt/task/init.py", line 264, in setup_profile
+    self.create_profile_from_target(adapter, profile_name=profile_name)
+  File "/Users/pavitkharbanda/Documents/Projects/Market Intelligence Pipeline/Market-Intelligence-Pipeline/producer/venv/lib/python3.9/site-packages/dbt/task/init.py", line 181, in create_profile_from_target
+    self.create_profile_from_profile_template(profile_template, profile_name)
+  File "/Users/pavitkharbanda/Documents/Projects/Market Intelligence Pipeline/Market-Intelligence-Pipeline/producer/venv/lib/python3.9/site-packages/dbt/task/init.py", line 165, in create_profile_from_profile_template
+    target = self.generate_target_from_input(prompts, initial_target)
+  File "/Users/pavitkharbanda/Documents/Projects/Market Intelligence Pipeline/Market-Intelligence-Pipeline/producer/venv/lib/python3.9/site-packages/dbt/task/init.py", line 118, in generate_target_from_input
+    target = self.generate_target_from_input(
+  File "/Users/pavitkharbanda/Documents/Projects/Market Intelligence Pipeline/Market-Intelligence-Pipeline/producer/venv/lib/python3.9/site-packages/dbt/task/init.py", line 131, in generate_target_from_input
+    target[key] = click.prompt(
+  File "/Users/pavitkharbanda/Documents/Projects/Market Intelligence Pipeline/Market-Intelligence-Pipeline/producer/venv/lib/python3.9/site-packages/click/termui.py", line 164, in prompt
+    value = prompt_func(prompt)
+  File "/Users/pavitkharbanda/Documents/Projects/Market Intelligence Pipeline/Market-Intelligence-Pipeline/producer/venv/lib/python3.9/site-packages/click/termui.py", line 147, in prompt_func
+    raise Abort() from None
+click.exceptions.Abort
+
+[0m16:24:04.193463 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10658b2b0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10892c370>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10892cca0>]}
+[0m16:24:04.195245 [debug] [MainThread]: Flushing usage events
+[0m16:24:08.082063 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1053a93a0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x102da62e0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10784b4c0>]}
+
+
+============================== 16:24:08.085852 | 6910b13b-d542-42b8-be4b-7672ef10996a ==============================
+[0m16:24:08.085852 [info ] [MainThread]: Running with dbt=1.7.0
+[0m16:24:08.086453 [debug] [MainThread]: running dbt with arguments {'partial_parse': 'True', 'log_path': 'logs', 'write_json': 'True', 'use_experimental_parser': 'False', 'printer_width': '80', 'warn_error': 'None', 'use_colors': 'True', 'profiles_dir': '/Users/pavitkharbanda/.dbt', 'static_parser': 'True', 'debug': 'False', 'cache_selected_only': 'False', 'log_format': 'default', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'target_path': 'None', 'invocation_command': 'dbt init market_pulse', 'send_anonymous_usage_stats': 'True', 'introspect': 'True', 'indirect_selection': 'eager', 'no_print': 'None', 'quiet': 'False', 'log_cache_events': 'False', 'version_check': 'True', 'fail_fast': 'False'}
+[0m16:24:08.087437 [info ] [MainThread]: A project called market_pulse already exists here.
+[0m16:24:08.088754 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1053a93a0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x107826610>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x107826730>]}
+[0m16:24:08.089165 [debug] [MainThread]: Flushing usage events
+[0m16:24:13.372886 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x104d1d2e0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10293a2e0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x106e95550>]}
+
+
+============================== 16:24:13.376160 | 899be4b1-14d7-48b2-9e96-5f6666866a95 ==============================
+[0m16:24:13.376160 [info ] [MainThread]: Running with dbt=1.7.0
+[0m16:24:13.376751 [debug] [MainThread]: running dbt with arguments {'log_cache_events': 'False', 'static_parser': 'True', 'indirect_selection': 'eager', 'send_anonymous_usage_stats': 'True', 'printer_width': '80', 'use_colors': 'True', 'debug': 'False', 'invocation_command': 'dbt init market_pulse', 'partial_parse': 'True', 'no_print': 'None', 'fail_fast': 'False', 'cache_selected_only': 'False', 'log_path': 'logs', 'quiet': 'False', 'version_check': 'True', 'introspect': 'True', 'use_experimental_parser': 'False', 'warn_error': 'None', 'log_format': 'default', 'target_path': 'None', 'write_json': 'True', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'profiles_dir': '/Users/pavitkharbanda/.dbt'}
+[0m16:24:13.377767 [info ] [MainThread]: A project called market_pulse already exists here.
+[0m16:24:13.379090 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x104d1d2e0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x106e826a0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x106e827c0>]}
+[0m16:24:13.379505 [debug] [MainThread]: Flushing usage events
+[0m16:24:59.473565 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1032872b0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x100ea62e0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x105401520>]}
+
+
+============================== 16:24:59.477756 | 9bd834dc-f6a4-40c8-a62f-02b8fd99b240 ==============================
+[0m16:24:59.477756 [info ] [MainThread]: Running with dbt=1.7.0
+[0m16:24:59.478362 [debug] [MainThread]: running dbt with arguments {'log_cache_events': 'False', 'write_json': 'True', 'target_path': 'None', 'log_format': 'default', 'introspect': 'True', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'partial_parse': 'True', 'log_path': 'logs', 'invocation_command': 'dbt init market_pulse', 'static_parser': 'True', 'send_anonymous_usage_stats': 'True', 'indirect_selection': 'eager', 'fail_fast': 'False', 'use_experimental_parser': 'False', 'use_colors': 'True', 'printer_width': '80', 'debug': 'False', 'version_check': 'True', 'no_print': 'None', 'cache_selected_only': 'False', 'warn_error': 'None', 'profiles_dir': '/Users/pavitkharbanda/.dbt', 'quiet': 'False'}
+[0m16:24:59.479401 [debug] [MainThread]: Starter project path: /Users/pavitkharbanda/Documents/Projects/Market Intelligence Pipeline/Market-Intelligence-Pipeline/producer/venv/lib/python3.9/site-packages/dbt/include/starter_project
+[0m16:24:59.485695 [info ] [MainThread]: 
+Your new dbt project "market_pulse" was created!
+
+For more information on how to configure the profiles.yml file,
+please consult the dbt documentation here:
+
+  https://docs.getdbt.com/docs/configure-your-profile
+
+One more thing:
+
+Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
+
+  https://community.getdbt.com/
+
+Happy modeling!
+
+[0m16:24:59.486182 [info ] [MainThread]: Setting up your profile.
+[0m16:25:52.230078 [info ] [MainThread]: Profile market_pulse written to /Users/pavitkharbanda/.dbt/profiles.yml using target's profile_template.yml and your supplied values. Run 'dbt debug' to validate the connection.
+[0m16:25:52.237045 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1032872b0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1053ee880>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1053ee8b0>]}
+[0m16:25:52.238540 [debug] [MainThread]: Flushing usage events
