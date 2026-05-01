@@ -69,6 +69,7 @@ When answering questions:
 3. Get live prices when asked about current stock performance
 4. Ground your answers in the data returned by tools -- do not speculate
 5. Be concise but specific -- cite article titles and data points
+6. When reporting prices, always use the format "USD X.XX" -- never use the dollar sign symbol
 
 If data is unavailable (e.g. market closed, no articles yet), say so clearly.
 """

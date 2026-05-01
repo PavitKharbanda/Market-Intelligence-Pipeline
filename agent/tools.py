@@ -237,14 +237,14 @@ def get_live_price(ticker: str) -> str:
 
         result = (
             f"Ticker: {ticker}\n"
-            f"Latest Close: ${latest['Close']:.2f}\n"
+            f"Latest Close: USD {latest['Close']:.2f}\n"
             f"Daily Change: {daily_change}\n"
             f"Volume: {int(latest['Volume']):,}\n"
-            f"High: ${latest['High']:.2f} | Low: ${latest['Low']:.2f}\n"
+            f"High: USD {latest['High']:.2f} | Low: USD {latest['Low']:.2f}\n"
         )
 
         try:
-            result += f"52-Week High: ${info.year_high:.2f} | Low: ${info.year_low:.2f}\n"
+            result += f"52-Week High: USD {info.year_high:.2f} | Low: USD {info.year_low:.2f}\n"
         except Exception:
             pass
 
