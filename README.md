@@ -40,3 +40,25 @@ market-pulse/
 │   ├── dags/
 │   │   └── market_pulse_dag.py
 │   └── (astro-generated files)
+
+
+silver/news Delta table
+        ↓
+embedder.py: reads articles, calls OpenAI embeddings API, 
+             saves FAISS index to agent/faiss_index/
+        ↓
+agent/tools.py: defines 3 tools
+  Tool 1 - rag_search(query): 
+    embeds query → searches FAISS → returns top 5 articles
+  Tool 2 - query_gold_table(sql):
+    reads Delta Lake gold tables directly with pandas
+    returns anomaly flags, daily sentiment counts
+  Tool 3 - get_live_price(ticker):
+    calls yfinance for current price
+        ↓
+agent/graph.py: LangGraph agent
+  User query → LLM (GPT-4o-mini) decides which tools to call
+  → calls tools → gets results → synthesizes final answer
+        ↓
+FastAPI endpoint (Phase 4): wraps graph.py in an HTTP endpoint
+Streamlit frontend (Phase 4): chat UI that calls the endpoint
