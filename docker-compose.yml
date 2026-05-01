@@ -84,5 +84,35 @@ services:
       "
     profiles: ["dbt"]
 
+  # ── FastAPI backend ──────────────────────────────────────────────────────
+  api:
+    build:
+      context: .
+      dockerfile: api/Dockerfile
+    env_file: .env
+    environment:
+      - DELTA_ROOT=/delta_lake
+    ports:
+      - "8081:8080"
+    volumes:
+      - ./delta_lake:/delta_lake
+      - ./agent:/app/agent       # agent code + FAISS index
+    depends_on:
+      - producer
+    restart: unless-stopped
+
+  # ── Streamlit frontend ───────────────────────────────────────────────────
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    environment:
+      - API_URL=http://api:8080   # Docker internal DNS resolves "api" service
+    ports:
+      - "8501:8501"
+    depends_on:
+      - api
+    restart: unless-stopped
+
 volumes:
   ivy2-cache:   # named volume so JARs survive docker-compose down/up

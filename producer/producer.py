@@ -199,8 +199,7 @@ def main():
         # 100 requests / (4 req/cycle) = 25 cycles max per day
         # 24h / 25 = ~58 min between cycles to be safe; 15 min is fine for dev
         log.info("Sleeping 15 minutes...")
-        time.sleep(900)
-
+        time.sleep(3600)
 
 if __name__ == "__main__":
     main()
