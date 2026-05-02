@@ -109,7 +109,7 @@ services:
     environment:
       - API_URL=http://api:8080   # Docker internal DNS resolves "api" service
     ports:
-      - "8501:8501"
+      - "8501:8080"   # host 8501 → container 8080 (Cloud Run also expects 8080)
     depends_on:
       - api
     restart: unless-stopped
